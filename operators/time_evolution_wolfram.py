@@ -7,7 +7,7 @@ from qlib import *
 script_dir = os.path.dirname(os.path.abspath(__file__))
 math_dir = os.path.join(script_dir, '..', 'mathematica')
 
-def time_evolve(H, t, psi0=None):
+def time_evolve_wolfram(H, t, psi0=None):
     H = H.to_matrix().tolist()
     if(psi0):
         psi0 = psi0.to_vector().tolist()
@@ -23,7 +23,7 @@ def time_evolve(H, t, psi0=None):
     session.terminate()
     return ket(res)
 
-def time_evolve_loop(H, t0, tf, step, psi0, method="integrate"):
+def time_evolve_loop_wolfram(H, t0, tf, step, psi0, method="integrate"):
     H = H.to_matrix().tolist()
     psi0 = psi0.to_vector().tolist()
     session = WolframLanguageSession()

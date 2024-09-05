@@ -13,10 +13,11 @@ __all__ = [
     "pauli_x", "pauli_y", "pauli_z", "pauli_p", "pauli_m",
     "j_z", "j_p", "j_m",
     "creation", "annihilation", 
-    "identity", "zeros", "projection", "time_evolve", "time_evolve_loop", "time_evolve_loop_test",
+    "identity", "zeros", "projection", "time_evolve", "time_evolve_loop",
     "state", "coherent", 
     "jc_hamiltonian", "rabi_hamiltonian", "reduced_dicke_hamiltonian", "dicke_hamiltonian", "reduced_tc_hamiltonian", "tc_hamiltonian", 
     "expectation_line_plot", "energy_schema", 
-    "eigensystem", "eigenvalues", "eigenstates"
+    "eigensystem", "eigenvalues", "eigenstates", 
+    "time_evolve_wolfram", "time_evolve_loop_wolfram"
 ]
 __version__ = "0.1.0"
