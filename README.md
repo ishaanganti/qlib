@@ -1,7 +1,6 @@
 # qlib
 
-A simple Python library for quantum mechanics simulations. Features include standard operator, bra, and ket manipulation, easy-to-use visualization tools, and frequently used Hamiltonians built in. Currently, in an effort to improve computational efficiency, time evolution is offloaded
-to Mathematica, although this will likely be changed in the future to increase accessibility. All expressions are nondimensionalized. 
+A simple Python library for quantum mechanics simulations. Features include standard operator, bra, and ket manipulation, easy-to-use visualization tools, and frequently used Hamiltonians built in. All expressions are nondimensionalized. 
 
 ## Basic Syntax
 
