@@ -2,18 +2,16 @@ from qlib import *
 from numpy import linspace
 import matplotlib.pyplot as plt
 
-def expectation_line_plot(states, oper, t0 = None, tf = None, plot_style = "vanilla"):
+def expectation_line_plot(states, opers, t0 = None, tf = None, plot_style = "vanilla"):
+    if not isinstance(opers, list):
+        opers = [opers]
+
     num_states = len(states)
     if(t0 == None and tf == None):
         t0, tf = 0, num_states - 1
     interval = tf - t0 + 1
-    expected_vals = [0 for i in range(num_states)]
-
-    for i in range(num_states):
-        expected_vals[i] = (states[i]).dag() * oper * (states[i])
-
     time_range = linspace(t0, tf, num_states)
-
+    
     fig, ax = plt.subplots()
     
     if plot_style == "clean":
@@ -24,9 +22,14 @@ def expectation_line_plot(states, oper, t0 = None, tf = None, plot_style = "vani
         line_color, legend_edge_color = set_vanilla_plot_style(ax)
     else: # for a random user input
         line_color, legend_edge_color = 'black', 'white'
-    
-    ax.plot(time_range, expected_vals, color=line_color, linewidth=2, label='Expected Value')
-    
+
+    for idx, oper in enumerate(opers):
+        expected_vals = [0 for _ in range(num_states)]
+        for i in range(num_states):
+            expected_vals[i] = (states[i]).dag() * oper * (states[i])
+        # plot each set of expected values with a unique label
+        ax.plot(time_range, expected_vals, linewidth=2, label=f'Oper {idx + 1}')
+
     ax.set_xlabel('Time')
     ax.set_ylabel('Expected Value')
     ax.set_title('Expected Value of Observable Over Time')
