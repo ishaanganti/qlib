@@ -4,4 +4,4 @@ from .wigner_plot import *
 
 
 __all__ = ["expectation_line_plot", "energy_schema", 
-           "plot_wigner", "plot_wigner_3d"]
+           "plot_wigner", "plot_wigner_3d", "animate_wigner_3d"]

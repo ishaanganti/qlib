@@ -1,3 +1,6 @@
+from qlib import bra, ket, oper
+from qlib import partial_trace
+from qlib import compute_wigner
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
@@ -49,3 +52,31 @@ def plot_wigner_3d(wigner, x_grid, p_grid, contour=True, figure_size=(10, 8)):
     ax.set_zlabel('Wigner Value')
     ax.set_title("Wigner Function (3D)")
     plt.show()
+
+def animate_wigner_3d(states: list, x_grid, p_grid, contour=True, figure_size=(10, 8), interval=20, z_axis_bounds=(-0.5, 0.5)):
+    X, P = np.meshgrid(x_grid, p_grid)
+    are_kets = isinstance(states[0], ket)
+    fig = plt.figure(figsize=figure_size)
+    ax = fig.add_subplot(111, projection='3d')
+
+    def update(frame):
+        ax.clear()  
+        curr_state = states[frame]
+        if(are_kets):
+            curr_state = curr_state.to_density_matrix()
+
+        wig, _, _= compute_wigner(curr_state, x_grid, p_grid)
+
+        if(contour):
+            ax.plot_surface(X, P, wig, cmap='RdBu_r', edgecolor='none')
+        else: 
+            ax.plot_surface(X, P, wig)
+        ax.set_xlabel('Position')
+        ax.set_ylabel('Momentum')
+        ax.set_zlabel('Wigner Value')
+        z_min, z_max = z_axis_bounds
+        ax.set_zlim(z_min, z_max)
+        ax.set_title(f"Wigner Function at time step {frame}")
+        return ax,
+
+    return FuncAnimation(fig, update, frames=len(states), interval=interval)
