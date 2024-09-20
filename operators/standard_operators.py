@@ -25,7 +25,7 @@ def identity(N: int) -> oper:
     """
     return oper(np.eye(N, dtype=complex))
 
-def projection(N: int) -> oper:
+def projection(N: ket) -> oper:
     """
     Create a projection operator for the given ket or bra.
 
@@ -38,3 +38,15 @@ def projection(N: int) -> oper:
     if isinstance(N, ket):
         return N * N.dag()
     raise TypeError("Projection can only be computed for ket objects.")
+
+def parity(N: int) -> oper:
+    """
+    Construct the parity operator for a finite-dimensional Hilbert space.
+
+    Parameters:
+    N (int): The dimension of the Hilbert space.
+
+    Returns:
+    oper: The parity operator as a qlib operator object.
+    """
+    return oper(np.diag([(-1)**n for n in range(N)]))

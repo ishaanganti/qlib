@@ -17,7 +17,7 @@ combined_psi0 = tensor(tls_psi0, cavity_psi0)
 t0, tf = 0, 400
 grain = 0.25 # finer grain
 
-states = time_evolve_loop(H, t0, tf, 0.25, combined_psi0, "exponential")
+states = time_evolve_loop(H, t0, tf, grain, combined_psi0, "integrate")
 excited_population = tensor(projection(state(2, 0)), identity(cavity_bsize))
 fig, ax = expectation_line_plot(states, excited_population, t0, tf, "clean_inverted")
 plt.show()

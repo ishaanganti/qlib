@@ -42,7 +42,6 @@ class oper:
             return self * other - other * self
         raise TypeError("Commutator can only be computed with another oper")
 
-    
     def format(self, decimals=3):
         matrix = self.matrix
         format_string = "{:." + str(decimals) + "f}"
@@ -62,8 +61,14 @@ class ket:
     def __init__(self, vector):
         self.vector = np.array(vector, dtype=complex)
 
+    def dim(self):
+        return self.vector.shape[0]
+
     def to_vector(self):
         return self.vector
+
+    def to_density_matrix(self):
+        return oper(np.outer(self.vector, self.vector.conj()))
 
     def dag(self):
         return bra(self.vector.conj())
@@ -109,6 +114,9 @@ class bra:
 
     def to_vector(self):
         return self.vector
+
+    def to_density_matrix(self):
+        return oper(np.outer(self.vector.conj(), self.vector))
 
     def dag(self):
         return ket(self.vector.conj())
