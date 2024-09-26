@@ -1,6 +1,6 @@
 # qlib
 
-A simple Python library for quantum mechanics simulations. Features include standard operator, bra, and ket manipulation, easy-to-use visualization tools, and frequently used Hamiltonians built in. All expressions are nondimensionalized. 
+A simple Python library for quantum mechanics simulations. Features include standard operator, bra, and ket manipulation, easy-to-use visualization tools, and frequently used Hamiltonians built in. All expressions are nondimensionalized.
 
 ## Basic Syntax
 
@@ -37,7 +37,12 @@ The output:
 ```
 
 ## Time Propagation
-Time propagation of a state given a Hamiltonian and a single time t is calculated via the time evolution operator (matrix exponential). Support for time-dependent Hamiltonians will be added soon. For propagation over a time range, two methods are available: repeated usage of the time evolution operator and numerical integration. For example, to evolve an excited state to some arbitrary time according to the Pauli Z matrix, we could write
+Time propagation of a state given a Hamiltonian and a single time t is calculated via the time evolution operator matrix exponential. We support
+time-dependent Hamiltonian usage; check the RWA example in the examples folder for usage samples. For propagation of a state over a time range, we support three methods: numerical integration, repeated usage of the time evolution operator, and eigenbasis expansion. Note that numerical integration is the most general method and is the only method that works with time-dependent Hamiltonians. However, for closed systems with time-independent Hamiltonians, the eigenexpansion approach is faster most of the time. Speedups of up to 75x are easily achieved over numerical solvers when this approach is used for systems with Hilbert space dimension less than ~5000 and time range greater than 100; benchmarks comparing these results to QuTiP out soon. 
+
+
+### Sample
+To evolve an excited state to some arbitrary time according to the Pauli Z matrix, we could write
 ```
 t = 10
 psi0 = state(2, 0)
@@ -50,7 +55,7 @@ This yields the result:
 ```
 
 ## Visualization Support
-Currently, the main visualization tools are expectation value plots and energy schema. Sample usage of both can be found in the 'examples' directory. Attached is a sample expectation value plot for the Jaynes-Cummings model:
+Currently, the main visualization tools are expectation value plots, energy schemas, and Wigner plots (both plots and animations). Currently, Wigner functions are calculated efficiently using the Laguerre polynomial expansion in the Fock basis. Sample usage all tools can be found in the 'examples' directory. Attached is a sample expectation value plot for the Jaynes-Cummings model:
 
 ![Alt text](https://i.imgur.com/bYZYXxU.png)
 
