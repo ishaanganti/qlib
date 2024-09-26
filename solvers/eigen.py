@@ -1,25 +1,26 @@
 from qlib import oper
 import numpy as np
+from scipy.linalg import eigh, eigvals
+
 
 def eigenvalues(op):
     """
     Returns the eigenvalues of the matrix wrapped in the oper class.
     """
 
-    return np.linalg.eigvals(op.matrix)
+    return eigvals(op.to_matrix())
 
 def eigenstates(op):
     """
     Returns the eigenstates (eigenvectors) of the matrix wrapped in the oper class.
     """
 
-    _, eigenvectors = np.linalg.eig(op.matrix)
+    _, eigenvectors = eigh(op.to_matrix())
     return eigenvectors
 
 def eigensystem(op):
     """
     Returns a tuple of eigenvalues and eigenstates (eigenvectors) of the matrix wrapped in the oper class.
     """
-
-    eigenvalues, eigenvectors = np.linalg.eig(op.to_matrix())
+    eigenvalues, eigenvectors = eigh(op.to_matrix())
     return eigenvalues, eigenvectors

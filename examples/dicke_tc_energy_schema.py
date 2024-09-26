@@ -16,7 +16,7 @@ Physical Review Letters, 90(4), 044101.
 https://doi.org/10.1103/PhysRevLett.90.044101
 '''
 
-num_tls, cavity_bsize, Omega = 5, 40, 1
+num_tls, cavity_bsize, Omega = 5, 20, 1
 fig, axs = plt.subplots(1, 2, figsize=(16, 6))
 
 models = [

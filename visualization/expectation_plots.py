@@ -1,6 +1,7 @@
 from qlib import *
 from numpy import linspace
 import matplotlib.pyplot as plt
+import numpy as np
 
 def expectation_line_plot(states, opers, t0 = None, tf = None, plot_style = "vanilla"):
     if not isinstance(opers, list):
@@ -23,13 +24,14 @@ def expectation_line_plot(states, opers, t0 = None, tf = None, plot_style = "van
     else: # for a random user input
         line_color, legend_edge_color = 'black', 'white'
 
+    result = np.zeros((len(opers), len(states)))
+    states_array = np.array([state.to_vector() for state in states])
     for idx, oper in enumerate(opers):
-        expected_vals = [0 for _ in range(num_states)]
-        for i in range(num_states):
-            expected_vals[i] = (states[i]).dag() * oper * (states[i])
-        # plot each set of expected values with a unique label
-        ax.plot(time_range, expected_vals, linewidth=2, label=f'Oper {idx + 1}')
-
+        oper_array = oper.to_matrix()
+        temp = np.dot(states_array, oper_array)
+        result[idx] = np.sum(np.conj(states_array) * temp, axis=1).real
+        ax.plot(time_range, result[idx], linewidth=2, label=f'Oper {idx + 1}')
+    
     ax.set_xlabel('Time')
     ax.set_ylabel('Expected Value')
     ax.set_title('Expected Value of Observable Over Time')

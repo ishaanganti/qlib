@@ -14,10 +14,11 @@ cavity_bsize = 40
 H = jc_hamiltonian(cavity_bsize, Omega, coupling)
 cavity_psi0, tls_psi0 = coherent(cavity_bsize, 4.0), state(2, 0)
 combined_psi0 = tensor(tls_psi0, cavity_psi0)
-t0, tf = 0, 400
+t0, tf = 0, 500
 grain = 0.25 # finer grain
 
-states = time_evolve_loop(H, t0, tf, grain, combined_psi0, "integrate")
+# eigenexpand is much faster for longer time propagation 
+states = time_evolve_loop(H, t0, tf, grain, combined_psi0, "eigenexpand")
 excited_population = tensor(projection(state(2, 0)), identity(cavity_bsize))
 fig, ax = expectation_line_plot(states, excited_population, t0, tf, "clean_inverted")
 plt.show()
