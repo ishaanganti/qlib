@@ -59,4 +59,6 @@ Currently, the main visualization tools are expectation value plots, energy sche
 
 ![Alt text](https://i.imgur.com/bYZYXxU.png)
 
+Wigner plot animations look pretty nice, too. And, they can be rotated for viewing from different angles. Here's a Wignor plot for the Dicke model with 4 TLS and strong coupling: 
 
+https://github.com/user-attachments/assets/35c16153-e1da-47f1-acb5-e41e2639afe4
