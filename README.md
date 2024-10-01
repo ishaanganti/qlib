@@ -2,6 +2,17 @@
 
 A simple Python library for quantum mechanics simulations. Features include standard operator, bra, and ket manipulation, easy-to-use visualization tools, and frequently used Hamiltonians built in. All expressions are nondimensionalized.
 
+## Install Instructions
+
+The library can be installed via
+```
+pip install qdynpylib
+```
+and imported into a program via
+```
+from qlib import *
+```
+'qdynpylib' stands for 'Quantum Dynamics Python Library.'
 ## Basic Syntax
 
 The core objects in the library are the following:
