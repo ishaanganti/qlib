@@ -1,1 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# macOS specific
 .DS_Store
+
+# Virtual environment directories (if using venv or conda)
+venv/
+.env/
